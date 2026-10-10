@@ -1,0 +1,138 @@
+body {
+    background-color: #C2E3ED;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-bottom: 70px; 
+}
+
+::selection {
+    background-color: rgba(211, 110, 110, 0.5);
+    color: #ffffff;
+}
+
+.header-container {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.main-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+}
+
+.chat-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.chat-box {
+    border: 1px solid #ccc;
+    height: 380px;
+    overflow-y: auto;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    font-size: 22px;
+}
+
+.user-msg {
+    color: blue;
+    text-align: right;
+    margin: 12px 0;
+    font-size: 22px;
+}
+
+.bot-msg {
+    color: green;
+    text-align: left;
+    margin: 12px 0;
+    font-size: 22px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.controls input {
+    flex-grow: 1;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.controls button {
+    padding: 12px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 18px;
+}
+
+#clear-btn {
+    background-color: #f1f1f1;
+}
+
+#clear-btn:hover {
+    background-color: #e2e2e2;
+}
+
+#mic-btn.recording {
+    background-color: red;
+    color: white;
+    border-color: red;
+}
+
+.left-bottom-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.left-bottom-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.lang-btn {
+    background-color: #444;
+    color: white;
+    border: 1px solid #666;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.lang-btn:hover {
+    background-color: #666;
+}
+
+.right-bottom-footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.right-bottom-footer img {
+    border: 0;
+    height: 100px;
+    vertical-align: middle;
+}

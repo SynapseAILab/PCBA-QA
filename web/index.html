@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-zh="PCBA AI 助教" data-en="PCBA AI TA">PCBA AI 助教</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- 
+    Version 1.2.0
+    Author Kevin Lawrence Tsai
+-->
+<body>
+    <div class="header-container">
+        <h1 class="main-title" data-zh="PCBA AI 助教" data-en="PCBA AI Teaching Assistant">PCBA AI 助教</h1>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <div class="bot-msg" data-zh="AI 助教: 您好！請點擊麥克風開始說話，或直接輸入文字。" data-en="PCBA-AI: Hello! Click the microphone to speak, or type your message.">AI 助教: 您好！請點擊麥克風開始說話，或直接輸入文字。</div>
+        </div>
+        <div class="controls">
+            <button id="mic-btn" data-zh="🎙️ 點擊說話" data-en="🎙️ Click to Speak">🎙️ 點擊說話</button>
+            <input type="text" id="user-input" data-zh-placeholder="語音轉出的文字會呈現在這裡..." data-en-placeholder="Text will appear here..." placeholder="語音轉出的文字會呈現在這裡...">
+            <button id="send-btn" data-zh="傳送" data-en="Send">傳送</button>
+            <button id="clear-btn" data-zh="清除" data-en="Clear">清除</button>
+        </div>
+    </div>
+
+    <footer class="left-bottom-footer">
+        <span>&copy; 2026-Present <a href="https://github.com/SynapseAILab" data-zh="能攻自會實驗室" data-en="Synapse AI Lab">能攻自會實驗室</a></span>
+        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">English</button>
+    </footer>
+
+    <div class="right-bottom-footer">
+        <img src="img/lab_logo.png" alt="Lab Logo">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
