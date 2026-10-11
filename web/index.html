@@ -3,38 +3,66 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-zh="PCBA AI 助教" data-en="PCBA AI TA">PCBA AI 助教</title>
+    <title>PCBA AI 助教系統</title>
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- 
-    Version 1.2.0
-    Author Kevin Lawrence Tsai
--->
 <body>
+    <div class="top-right-auth">
+        <button id="logout-btn" class="auth-btn">登出</button>
+    </div>
+
     <div class="header-container">
-        <h1 class="main-title" data-zh="PCBA AI 助教" data-en="PCBA AI Teaching Assistant">PCBA AI 助教</h1>
+        <h1 class="main-title">PCBA AI 助教</h1>
     </div>
 
     <div class="chat-container">
         <div class="chat-box" id="chatBox">
-            <div class="bot-msg" data-zh="AI 助教: 您好！請點擊麥克風開始說話，或直接輸入文字。" data-en="PCBA-AI: Hello! Click the microphone to speak, or type your message.">AI 助教: 您好！請點擊麥克風開始說話，或直接輸入文字。</div>
+            <div class="bot-msg">AI 助教: 您好！請點擊麥克風開始說話，或直接輸入文字。</div>
         </div>
         <div class="controls">
-            <button id="mic-btn" data-zh="🎙️ 點擊說話" data-en="🎙️ Click to Speak">🎙️ 點擊說話</button>
-            <input type="text" id="user-input" data-zh-placeholder="語音轉出的文字會呈現在這裡..." data-en-placeholder="Text will appear here..." placeholder="語音轉出的文字會呈現在這裡...">
-            <button id="send-btn" data-zh="傳送" data-en="Send">傳送</button>
-            <button id="clear-btn" data-zh="清除" data-en="Clear">清除</button>
+            <button id="mic-btn">🎙️ 點擊說話</button>
+            <input type="text" id="user-input" placeholder="請輸入訊息或使用語音提問...">
+            <button id="send-btn">傳送</button>
+            <button id="clear-btn">清除</button>
         </div>
     </div>
 
     <footer class="left-bottom-footer">
-        <span>&copy; 2026-Present <a href="https://github.com/SynapseAILab" data-zh="能攻自會實驗室" data-en="Synapse AI Lab">能攻自會實驗室</a></span>
-        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">English</button>
+        <span>
+            +886-2-29097811&nbsp;#2003&nbsp;&middot;&nbsp;黎明技術學院 電機工程學系
+            <br>
+            &copy; 2026-Present <a href="https://github.com/SynapseAILab">能攻自會實驗室</a>
+        </span>
     </footer>
 
+    <div class="center-bottom-footer">
+        <span>目前僅支援繁體中文</span>
+    </div>
+
     <div class="right-bottom-footer">
+        <img src="img/school_logo.png" alt="School Logo">
         <img src="img/lab_logo.png" alt="Lab Logo">
+    </div>
+
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-card tech-glass">
+            <div class="modal-header">
+                <div class="tech-radar-icon">
+                    <div class="radar-wave"></div>
+                    <div class="radar-wave wave-2"></div>
+                    <span>🎙️</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">提示訊息</p>
+            </div>
+            <div class="modal-footer">
+                <button id="modalOkBtn" class="modal-btn-red">確認授權 / OK</button>
+                <button id="modalYesBtn" class="modal-btn-red" style="display: none;">是</button>
+                <button id="modalNoBtn" class="modal-btn-yellow" style="display: none; margin-left: 10px;">否</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
