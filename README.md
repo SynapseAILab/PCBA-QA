@@ -16,6 +16,6 @@ In hands-on lab environments, due to the precision of production line equipment 
 
 
 <p>
-    <img src="assets/lab_logo.png"  alt="lab-logo" width="10%" height="10%">
+    <img src="assets/school_logo.png"  alt="school-logo" width="10%" height="10%">&nbsp;<img src="assets/lab_logo.png"  alt="lab-logo" width="10%" height="10%">
 </p>
 © 2026–present SynapseAILab
