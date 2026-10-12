@@ -150,7 +150,7 @@ if (SpeechRecognition) {
         const speechToText = event.results[0][0].transcript;
         
         if (/[a-zA-Z]/.test(speechToText)) {
-            showCustomAlert('⚠️ 語音辨識錯誤：僅支援繁體中文輸入，偵測到英文字母。');
+            showCustomAlert('⚠️ 語音辨識錯誤\n僅支援繁體中文輸入，偵測到非中文內容。');
             return;
         }
 
@@ -199,13 +199,19 @@ sendBtn.addEventListener('click', () => {
     }
 
     const text = userInput.value.trim();
-    if (text) {
-        appendMessage('user', text);
-        sendToBackend(text);
-        userInput.value = '';
-    } else {
+    if (!text) {
         appendMessage('bot', '我不清楚你在說甚麼 請再說一次', true);
+        return;
     }
+
+    if (/[a-zA-Z]/.test(text)) {
+        showCustomAlert('⚠️ 輸入錯誤：僅支援繁體中文輸入，偵測到非中文內容。');
+        return;
+    }
+
+    appendMessage('user', text);
+    sendToBackend(text);
+    userInput.value = '';
 });
 
 userInput.addEventListener('keypress', (e) => {
@@ -228,7 +234,7 @@ clearBtn.addEventListener('click', () => {
 
     chatBox.innerHTML = ''; 
     userInput.value = ''; 
-    appendMessage('bot', '您好！請點擊麥克風開始說話，或直接輸入文字。', false); 
+    appendMessage('bot', '系統提示: 您好！請點擊麥克風開始說話，或直接輸入文字。', false); 
 });
 
 function sendToBackend(text) {
