@@ -395,6 +395,17 @@ body {
     transform: translateY(0);
 }
 
+.launcher-page-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.launcher-page-logo img {
+    max-width: 700px;
+    height: auto;
+}
+
 @media print {
     body * {
         display: none !important;
