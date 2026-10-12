@@ -3,11 +3,48 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="favicon.ico">
-    <title>啟動器</title>
+    <link rel="stylesheet" href="style.css">
+    <title>驅動器</title>
 </head>
 <body style="text-align:center; padding-top:100px; background:#C2E3ED;">
-    <button onclick="window.open('index.html')" style="padding:15px 30px; font-size:20px; font-weight:bold; background:#0d6efd; color:white; border:none; border-radius:8px; cursor:pointer;">
-        開啟 PCBA AI 助教系統
-    </button>
+    <div class="launcher-page-logo">
+        <img src="img/school_logo.png" alt="School Logo">
+    </div>
+    <br>
+    <div>
+        <button id="launch-btn" style="padding:15px 30px; font-size:20px; font-weight:bold; background:#0d6efd; color:white; border:none; border-radius:8px; cursor:pointer;">
+            啟動 PCBA AI 助教系統
+        </button>
+    </div>
+
+    <div id="launcherModal" class="modal-overlay">
+        <div class="modal-card tech-glass">
+            <div class="modal-header">
+                <div class="tech-radar-icon">
+                    <div class="radar-wave"></div>
+                    <div class="radar-wave wave-2"></div>
+                    <span>🚀</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="launcherMessage">系統啟動中 (3)</p>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="right-bottom-footer">
+        <img src="img/lab_logo.png" alt="Lab Logo">
+    </div>
+    <footer class="left-bottom-footer">
+        <span>
+            +886-2-29097811&nbsp;#2003&nbsp;&middot;&nbsp;黎明技術學院 電機工程學系
+            <br>
+            &copy; 2026-Present <a href="https://github.com/SynapseAILab">能攻自會實驗室</a>
+        </span>
+    </footer>
+    
+    <script src="launcher_script.js"></script>
 </body>
 </html>
