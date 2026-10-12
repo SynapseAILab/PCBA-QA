@@ -88,7 +88,7 @@ document.getElementById('modalYesBtn').addEventListener('click', () => {
             userInput.value = '';
             appendMessage('bot', '您已成功登出系統。', false);
 
-            messageEl.textContent = '已完成登出，點擊確認將返回系統啟動頁。';
+            messageEl.textContent = '已完成登出\n將返回系統啟動頁';
             if (emojiSpan) {
                 emojiSpan.textContent = '🔒';
             }
@@ -194,7 +194,7 @@ micBtn.addEventListener('click', () => {
 
 sendBtn.addEventListener('click', () => {
     if (!navigator.onLine) {
-        showCustomAlert('⚠️ 目前無網路連線，無法傳送訊息至伺服器！');
+        showCustomAlert('目前無網路連線\n無法傳送訊息至伺服器！');
         return;
     }
 
@@ -205,7 +205,7 @@ sendBtn.addEventListener('click', () => {
     }
 
     if (/[a-zA-Z]/.test(text)) {
-        showCustomAlert('⚠️ 輸入錯誤：僅支援繁體中文輸入，偵測到非中文內容。');
+        showCustomAlert('僅支援繁體中文輸入\n偵測到非中文內容');
         return;
     }
 
@@ -326,3 +326,30 @@ function removeLoadingMessage(id) {
         loadingEl.remove();
     }
 }
+
+
+
+// 在 script.js 中加入權限主動偵測與自動提示邏輯
+
+async function checkMicrophonePermission() {
+    if (navigator.permissions && navigator.permissions.query) {
+        try {
+            const permissionStatus = await navigator.permissions.query({ name: 'microphone' });
+            if (permissionStatus.state === 'denied') {
+                showAlert('麥克風權限已被瀏覽器封鎖！\n請點擊網址列左側的「鎖頭 🔒」圖示\n將麥克風改為「允許」後重新整理');
+            }
+            permissionStatus.onchange = () => {
+                if (permissionStatus.state === 'denied') {
+                    showAlert('麥克風權限已被瀏覽器封鎖！\n請點擊網址列左側的「鎖頭 🔒」圖示\n將麥克風改為「允許」後重新整理');
+                }
+            };
+        } catch (e) {
+            console.log('Permissions API 狀態檢查不支援', e);
+        }
+    }
+}
+
+// 頁面載入完成後自動執行權限檢查
+window.addEventListener('load', () => {
+    checkMicrophonePermission();
+});
