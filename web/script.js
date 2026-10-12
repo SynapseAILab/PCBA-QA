@@ -1,5 +1,5 @@
 let countdownTimer = null;
-let shouldCloseOnOk = false;
+let shouldRedirectOnOk = false;
 let currentRequestId = 0;
 
 function showCustomAlert(message, emoji = '🎙️', showConfirm = false) {
@@ -8,7 +8,7 @@ function showCustomAlert(message, emoji = '🎙️', showConfirm = false) {
         countdownTimer = null;
     }
 
-    shouldCloseOnOk = false;
+    shouldRedirectOnOk = false;
 
     const modal = document.getElementById('customModal');
     const messageEl = document.getElementById('modalMessage');
@@ -50,10 +50,9 @@ modalOverlay.addEventListener('click', (e) => {
 document.getElementById('modalOkBtn').addEventListener('click', () => {
     const modal = document.getElementById('customModal');
     modal.classList.remove('active');
-    if (shouldCloseOnOk) {
-        shouldCloseOnOk = false;
-        window.open('', '_self').close();
-        window.close();
+    if (shouldRedirectOnOk) {
+        shouldRedirectOnOk = false;
+        window.location.href = 'launcher.html';
     }
 });
 
@@ -89,12 +88,12 @@ document.getElementById('modalYesBtn').addEventListener('click', () => {
             userInput.value = '';
             appendMessage('bot', '您已成功登出系統。', false);
 
-            messageEl.textContent = '已完成登出，您可以安全關閉此網頁分頁。';
+            messageEl.textContent = '已完成登出，點擊確認將返回系統啟動頁。';
             if (emojiSpan) {
                 emojiSpan.textContent = '🔒';
             }
             document.getElementById('modalOkBtn').style.display = 'inline-block';
-            shouldCloseOnOk = true;
+            shouldRedirectOnOk = true;
         }
     }, 1000);
 });
@@ -149,6 +148,12 @@ if (SpeechRecognition) {
             return;
         }
         const speechToText = event.results[0][0].transcript;
+        
+        if (/[a-zA-Z]/.test(speechToText)) {
+            showCustomAlert('⚠️ 語音辨識錯誤：僅支援繁體中文輸入，偵測到英文字母。');
+            return;
+        }
+
         userInput.value = speechToText;
         appendMessage('user', speechToText);
         sendToBackend(speechToText);
@@ -198,6 +203,14 @@ sendBtn.addEventListener('click', () => {
         appendMessage('user', text);
         sendToBackend(text);
         userInput.value = '';
+    } else {
+        appendMessage('bot', '我不清楚你在說甚麼 請再說一次', true);
+    }
+});
+
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendBtn.click();
     }
 });
 
@@ -206,7 +219,6 @@ clearBtn.addEventListener('click', () => {
         window.speechSynthesis.cancel();
     }
 
-    // 終止所有正在等待中的回應與計時器
     currentRequestId++;
 
     chatBox.classList.add('clear-anim');
@@ -226,7 +238,7 @@ function sendToBackend(text) {
     }
 
     const requestId = ++currentRequestId;
-    const apiUrl = 'https://yourdomain.com'; 
+    const apiUrl = 'https://yourdomain.com';  // update your domain name. ex. https://dee.lit.edu.tw/
     const payload = { message: text };
 
     const loadingId = 'loading-' + Date.now();
@@ -253,7 +265,6 @@ function sendToBackend(text) {
 
     Promise.all([fetchCall, minDelay])
         .then(([result]) => {
-            // 如果在此期間點擊了清除按鈕，requestId 會過期，直接忽略不輸出
             if (requestId !== currentRequestId) {
                 removeLoadingMessage(loadingId);
                 return;
