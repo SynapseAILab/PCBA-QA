@@ -411,7 +411,6 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 }
 
 
-// 頁面載入完成後自動執行權限檢查
 window.addEventListener('load', () => {
     checkMicrophonePermission();
 });
