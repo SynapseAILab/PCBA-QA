@@ -349,7 +349,71 @@ async function checkMicrophonePermission() {
     }
 }
 
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'zh-TW';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    micBtn.addEventListener('click', () => {
+        if (micBtn.classList.contains('recording')) {
+            recognition.stop();
+            return;
+        }
+        try {
+            recognition.start();
+        } catch (e) {
+            console.log('語音辨識啟動失敗:', e);
+            showAlert('語音辨識已在運行中或無法啟動，請稍後再試。');
+        }
+    });
+
+    recognition.onstart = () => {
+        micBtn.classList.add('recording');
+        micBtn.textContent = '聆聽中...';
+    };
+
+    recognition.onresult = (event) => {
+        const speechText = event.results[0][0].transcript;
+        if (!validateTraditionalChinese(speechText)) {
+            showAlert('語音辨識偵測到非繁體中文\n請使用繁體中文發音\n確認 / OK');
+            return;
+        }
+        userInput.value = speechText;
+        handleSend();
+    };
+
+    recognition.onerror = (event) => {
+        micBtn.classList.remove('recording');
+        micBtn.textContent = '語音';
+        
+        let errorMsg = '語音辨識發生錯誤，請重新點擊麥克風。';
+        
+        if (event.error === 'no-speech') {
+            errorMsg = '未偵測到您的語音內容\n請靠近麥克風重新說話！\n確認 / OK';
+        } else if (event.error === 'network') {
+            errorMsg = '語音網路連線失敗！\n提示：Chrome 語音辨識不支援一般的 http 區域網域 IP，\n請使用 https:// 或本機 localhost 測試。';
+        } else if (event.error === 'not-allowed') {
+            errorMsg = '麥克風權限遭到拒絕或封鎖\n請點擊網址列左側鎖頭圖示解除封鎖！\n確認 / OK';
+        }
+        
+        showAlert(errorMsg);
+    };
+
+    recognition.onend = () => {
+        micBtn.classList.remove('recording');
+        micBtn.textContent = '語音';
+    };
+} else {
+    micBtn.style.display = 'none';
+    showAlert('您的瀏覽器不支援語音辨識功能\n建議使用 Google Chrome 瀏覽器\n確認 / OK');
+}
+
+
 // 頁面載入完成後自動執行權限檢查
 window.addEventListener('load', () => {
     checkMicrophonePermission();
 });
+
+
