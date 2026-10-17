@@ -44,7 +44,25 @@
         <img src="img/school_logo.png" alt="School Logo">
         <img src="img/lab_logo.png" alt="Lab Logo">
     </div>
-    
+    <div class="launcher-controls" style="text-align: center; margin-top: 20px;">
+        <button id="guide-btn" class="modal-btn-yellow">操作說明</button>
+    </div>
+
+<!-- 操作說明教學對話框 (Tech Glass Modal) - 寬度已放大 -->
+<div id="guideModal" class="modal-overlay">
+    <div class="modal-card tech-glass" style="max-width: 850px; text-align: left;">
+        
+        <div class="modal-body" style="font-size: 35px; line-height: 1.8; color: #e2e8f0;">
+            <p style="text-align: center; font-weight: bold; font-size: 40px; margin-bottom: 15px; color: #ffc107;">【PCBA AI 助教系統操作教學】</p>
+            <p><b>1. 系統啟動：</b>點擊上方藍色「啟動 PCBA AI 助教系統」按鈕，完成 3 秒倒數後進入主聊天介面。</p>
+            <p><b>2. 語音與文字互動：</b>本系統<b>強制支援繁體中文</b>。您可以直接打字，或點擊「點擊說話」使用語音輸入。</p>
+            <p><b>3. 系統登出：</b>點擊右上角的「登出」按鈕，即可進行 3 秒倒數並安全返回本啟動頁面。</p>
+        </div>
+        <div class="modal-footer" style="margin-top: 25px; display: flex; justify-content: center;">
+            <button id="guideCloseBtn" class="modal-btn-yellow">了解 / Close</button>
+        </div>
+    </div>
+</div>
     <footer class="left-bottom-footer">
         <span style="text-align: left;">
             +886-2-29097811&nbsp;#2003&nbsp;&middot;&nbsp;黎明技術學院 電機工程學系
