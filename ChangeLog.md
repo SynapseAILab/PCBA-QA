@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
 
+## 1.3.5 - 2026-10-19
+
+## Add new function
+
+- Add `\rule` and `\help` command
+- Implement the command
+- Update `style.css` and `launcher_script.js`
+- Update `index.html`
+- Resize Banner
 
 ## 1.3.0 - 2026-10-12
 
