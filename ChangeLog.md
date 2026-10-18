@@ -6,7 +6,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## 1.3.5 - 2026-10-19
 
-## Add new function
+### Add new function
 
 - Add `\rule` and `\help` command
 - Implement the command
@@ -24,7 +24,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## 1.2.6 - 2026-10-12
 
-## Update file
+### Update file
 
 - `launcher.html`
 - Create `launcher_script.js`
