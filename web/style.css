@@ -417,7 +417,7 @@ body {
 
 .launcher-page-logo img {
     width: 100%;
-    max-width: min(700px, 50vw);
+    max-width: min(10000px, 50vw);
     height: auto;
 }
 
@@ -494,6 +494,15 @@ body {
 @keyframes fadeOutIntro {
     0% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+.bot-msg {
+    color: #198754;
+    text-align: left;
+    margin: 1.5vh 0;
+    font-size: clamp(21px, 1.9vw, 28px);
+    font-weight: 500;
+    white-space: pre-line;
 }
 
 @media print {
