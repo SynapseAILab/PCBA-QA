@@ -150,7 +150,7 @@ if (SpeechRecognition) {
         const speechToText = event.results[0][0].transcript;
         
         if (/[a-zA-Z]/.test(speechToText)) {
-            showCustomAlert('⚠️ 語音辨識錯誤\n僅支援繁體中文輸入，偵測到非中文內容。');
+            showCustomAlert('⚠️ 語音辨識錯誤\n僅支援繁體中文輸入\n偵測到非中文內容。');
             return;
         }
 
@@ -203,8 +203,39 @@ sendBtn.addEventListener('click', () => {
         appendMessage('bot', '我不清楚你在說甚麼 請再說一次', true);
         return;
     }
+    if (text === '/help') {
+        if (userInput) userInput.value = '';
+        
+        appendMessage('user', text);
+        
+        const helpText = "【PCBA AI 助教系統操作教學】\n" +
+            "1. 系統啟動：點擊首頁「啟動 PCBA AI 助教系統」按鈕，完成 3 秒倒數後進入主聊天介面。\n" +
+            "2. 語音與文字互動：本系統強制支援繁體中文。您可以直接打字，或點擊「點擊說話」使用語音輸入。\n" +
+            "3. 即時中斷機制：當 AI 正在語音朗讀或思考回覆時，若再次點擊麥克風按鈕，可立即中斷當前語音與回覆。\n" +
+            "4. 快速指令：在輸入框中輸入 /rule 並送出，即可隨時檢視本操作教學說明。\n" +
+            "5. 系統登出：點擊右上角的「登出」按鈕，即可進行 3 秒倒數並安全返回啟動頁面。";
+        
+        appendMessage('bot', helpText, false);
+        return;
+    }
 
-    if (/[a-zA-Z]/.test(text)) {
+    if (text === '/rule') {
+        if (userInput) userInput.value = '';
+        
+        appendMessage('user', text);
+        
+        const helpText = "【PCBA AI 助教系統指令教學】\n" +
+            "1. 系統啟動：點擊首頁「啟動 PCBA AI 助教系統」按鈕，完成 3 秒倒數後進入主聊天介面。\n" +
+            "2. 語音與文字互動：本系統強制支援繁體中文。您可以直接打字，或點擊「點擊說話」使用語音輸入。\n" +
+            "3. 即時中斷機制：當 AI 正在語音朗讀或思考回覆時，若再次點擊麥克風按鈕，可立即中斷當前語音與回覆。\n" +
+            "4. 快速指令：在輸入框中輸入 /help 並送出，即可隨時檢視本操作教學說明。\n" +
+            "5. 系統登出：點擊右上角的「登出」按鈕，即可進行 3 秒倒數並安全返回啟動頁面。";
+        
+        appendMessage('bot', helpText, false);
+        return;
+    }
+
+    if (/[a-zA-Z\u3040-\u30ff\uac00-\ud7af\u0e00-\u0e7f\u1000-\u109F\u1780-\u17ff\u0400-\u04FF]/.test(text)) {
         showCustomAlert('僅支援繁體中文輸入\n偵測到非中文內容');
         return;
     }
@@ -234,7 +265,7 @@ clearBtn.addEventListener('click', () => {
 
     chatBox.innerHTML = ''; 
     userInput.value = ''; 
-    appendMessage('bot', '系統提示: 您好！請點擊麥克風開始說話，或直接輸入文字。', false); 
+    appendMessage('bot', '系統提示: 您好！請點擊麥克風開始說話，或直接輸入文字。\n若需查看系統操作教學，請輸入 /help。\n若需了解系統指令與使用規範，請輸入 /rule。', false); 
 });
 
 function sendToBackend(text) {
@@ -409,7 +440,6 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     micBtn.style.display = 'none';
     showAlert('您的瀏覽器不支援語音辨識功能\n建議使用 Google Chrome 瀏覽器\n確認 / OK');
 }
-
 
 window.addEventListener('load', () => {
     checkMicrophonePermission();
